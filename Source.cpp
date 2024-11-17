@@ -12,10 +12,9 @@ private:
 
 public:
     //конструктор
-    Stack(int size) {
-        capacity = size;
+    Stack(int size) : capacity(size), topIndex(-1) 
+    {
         arr = new T[capacity];
-        topIndex = -1; //=> стек пуст
     }
 
     //деструктор
@@ -57,15 +56,10 @@ public:
         return topIndex == capacity - 1;
     }
 
-    //размер стека
-    int size() const {
-        return topIndex + 1;
-    }
     //вывод элементов стека
     void print() const {
         if (isEmpty()) {
-            cout << "Stack is empty" << endl;
-            return;
+            throw underflow_error("Stack is empty");
         }
 
         cout << "Stacks elements: ";
@@ -83,7 +77,7 @@ void line()
 
 int main() {
 
-    Stack<int> Stack1(5); 
+    Stack<float> Stack1(5); 
 
     try {
         Stack1.push(12);
